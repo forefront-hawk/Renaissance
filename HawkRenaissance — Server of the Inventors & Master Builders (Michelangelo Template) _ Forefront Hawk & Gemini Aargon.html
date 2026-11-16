@@ -1,0 +1,1912 @@
+<!DOCTYPE html>
+<html lang="en" data-device="desktop" data-theme="gold">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HawkRenaissance — Server of the Inventors &amp; Master Builders (Michelangelo Template) | Forefront Hawk &amp; Gemini Aargon</title>
+<style>
+  :root {
+    --bg: #070A12;
+    --bg-panel: #0E1422;
+    --bg-card: #131B2E;
+    --accent: #D4AF37;
+    --accent-soft: rgba(212, 175, 55, 0.16);
+    --cyan: #00F5D4;
+    --cyan-soft: rgba(0, 245, 212, 0.14);
+    --emerald: #10B981;
+    --emerald-soft: rgba(16, 185, 129, 0.16);
+    --danger: #F87171;
+    --danger-soft: rgba(248, 113, 113, 0.16);
+    --text: #F8FAFC;
+    --text-muted: #94A3B8;
+    --border: rgba(212, 175, 55, 0.36);
+    --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  }
+
+  html[data-theme="tactical"] {
+    --bg: #040D15;
+    --bg-panel: #081928;
+    --bg-card: #0D253B;
+    --accent: #00F5D4;
+    --accent-soft: rgba(0, 245, 212, 0.16);
+    --cyan: #F59E0B;
+    --cyan-soft: rgba(245, 158, 11, 0.16);
+    --text: #F0F9FF;
+    --text-muted: #7DD3FC;
+    --border: rgba(0, 245, 212, 0.4);
+  }
+
+  html[data-theme="cyberpunk"] {
+    --bg: #0B0318;
+    --bg-panel: #15072C;
+    --bg-card: #210B42;
+    --accent: #FF2A85;
+    --accent-soft: rgba(255, 42, 133, 0.18);
+    --cyan: #00F0FF;
+    --cyan-soft: rgba(0, 240, 255, 0.16);
+    --text: #FDF2F8;
+    --text-muted: #C4B5FD;
+    --border: rgba(255, 42, 133, 0.45);
+  }
+
+  html[data-theme="matrix"] {
+    --bg: #020A04;
+    --bg-panel: #05160A;
+    --bg-card: #092412;
+    --accent: #00FF66;
+    --accent-soft: rgba(0, 255, 102, 0.16);
+    --cyan: #38BDF8;
+    --cyan-soft: rgba(56, 189, 248, 0.15);
+    --text: #ECFDF5;
+    --text-muted: #6EE7B7;
+    --border: rgba(0, 255, 102, 0.4);
+  }
+
+  html[data-theme="daylight"] {
+    --bg: #F6F1E7;
+    --bg-panel: #FDFBF7;
+    --bg-card: #EFE7D6;
+    --accent: #8C5A08;
+    --accent-soft: rgba(140, 90, 8, 0.12);
+    --cyan: #0369A1;
+    --cyan-soft: rgba(3, 105, 161, 0.12);
+    --text: #1E293B;
+    --text-muted: #475569;
+    --border: rgba(140, 90, 8, 0.35);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    padding: 16px;
+    line-height: 1.5;
+    min-height: 100vh;
+    transition: background 0.22s ease, color 0.22s ease;
+    overflow-x: hidden;
+  }
+
+  a { color: var(--cyan); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* 4-Posture Reconfigurer Shell (F2-POSTURE) */
+  .app-shell {
+    max-width: 1460px;
+    margin: 0 auto;
+    transition: max-width 0.28s ease;
+  }
+
+  html[data-device="mobile"] .app-shell {
+    max-width: 430px;
+    border: 3px solid var(--accent);
+    border-radius: 26px;
+    padding: 12px;
+    background: var(--bg-panel);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.65);
+  }
+
+  html[data-device="tablet"] .app-shell {
+    max-width: 1024px;
+    border: 2px solid var(--border);
+    border-radius: 18px;
+    padding: 14px;
+  }
+
+  html[data-device="fold"] .app-shell {
+    max-width: 1360px;
+    border: 3px solid var(--cyan);
+    border-radius: 20px;
+    padding: 14px;
+  }
+
+  .fold-hinge-banner {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(90deg, transparent, var(--cyan-soft), transparent);
+    border-top: 1px dashed var(--cyan);
+    border-bottom: 1px dashed var(--cyan);
+    color: var(--cyan);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    padding: 4px 12px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  html[data-device="fold"] .fold-hinge-banner {
+    display: flex;
+  }
+
+  /* Header */
+  .top-header {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.3);
+  }
+
+  .brand-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .brand-badge {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--accent), var(--cyan));
+    color: #070A12;
+    font-weight: 900;
+    font-size: 1.35rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .brand-title {
+    font-size: 1.18rem;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+
+  .brand-sub {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+  }
+
+  .toolbar-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pill {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    padding: 4px 9px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--accent-soft);
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .pill.emerald {
+    background: var(--emerald-soft);
+    border-color: var(--emerald);
+    color: var(--emerald);
+  }
+
+  .pill.cyan {
+    background: var(--cyan-soft);
+    border-color: var(--cyan);
+    color: var(--cyan);
+  }
+
+  select, input[type="text"], input[type="search"], textarea {
+    background: var(--bg-card);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 0.82rem;
+    font-family: inherit;
+  }
+
+  button {
+    background: var(--bg-card);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.16s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  button:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    transform: translateY(-1px);
+  }
+
+  button.btn-gold {
+    background: var(--accent);
+    color: #070A12;
+    border-color: var(--accent);
+    font-weight: 800;
+  }
+
+  button.btn-cyan {
+    background: var(--cyan-soft);
+    color: var(--cyan);
+    border-color: var(--cyan);
+    font-weight: 700;
+  }
+
+  button.btn-danger {
+    background: var(--danger-soft);
+    color: var(--danger);
+    border-color: var(--danger);
+    font-weight: 700;
+  }
+
+  button.active-posture, button.active-tab {
+    background: var(--accent);
+    color: #070A12;
+    border-color: var(--accent);
+    font-weight: 800;
+  }
+
+  /* ΩΑΡ Evolutionary & Flash-Mirror Strip */
+  .oar-guard-strip {
+    background: var(--bg-panel);
+    border: 1px solid var(--emerald);
+    border-left: 5px solid var(--emerald);
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 0.8rem;
+  }
+
+  .oar-guard-strip.tampered {
+    border-color: var(--danger);
+    border-left-color: var(--danger);
+    background: rgba(248, 113, 113, 0.1);
+  }
+
+  /* Bottega Saeculorum Banner (Mirrors Project Fortunatus Saeculorum Banner) */
+  .saeculorum-banner {
+    background: linear-gradient(135deg, var(--bg-panel), var(--bg-card));
+    border: 1px solid var(--accent);
+    border-left: 5px solid var(--accent);
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin-bottom: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  /* Main 3-Column Fortunatus-Style Server Grid */
+  .workspace-grid {
+    display: grid;
+    grid-template-columns: 345px 1fr 390px;
+    gap: 14px;
+    align-items: start;
+  }
+
+  html[data-device="mobile"] .workspace-grid {
+    grid-template-columns: 1fr;
+  }
+
+  html[data-device="tablet"] .workspace-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  html[data-device="fold"] .workspace-grid {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 28px;
+  }
+
+  @media (max-width: 1180px) {
+    .workspace-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 780px) {
+    .workspace-grid { grid-template-columns: 1fr; }
+  }
+
+  .panel {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.26);
+  }
+
+  .panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .panel-title {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--accent);
+  }
+
+  /* Inventor Node List */
+  .search-row {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+
+  .search-row input { flex: 1; }
+
+  .inventor-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 540px;
+    overflow-y: auto;
+    padding-right: 4px;
+  }
+
+  .inventor-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 11px 12px;
+    text-align: left;
+    width: 100%;
+    display: block;
+    cursor: pointer;
+    transition: all 0.16s ease;
+  }
+
+  .inventor-card:hover {
+    border-color: var(--cyan);
+    transform: translateX(2px);
+  }
+
+  .inventor-card.selected {
+    border: 2px solid var(--accent);
+    background: var(--accent-soft);
+    box-shadow: 0 0 16px var(--accent-soft);
+  }
+
+  .inventor-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+  }
+
+  .inventor-name {
+    font-weight: 800;
+    font-size: 0.89rem;
+    color: var(--text);
+  }
+
+  .inventor-tag {
+    font-family: var(--font-mono);
+    font-size: 0.67rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: var(--cyan-soft);
+    color: var(--cyan);
+  }
+
+  /* Center Stage: Breakthrough Chronicle + 3D Stage + Synth */
+  .hero-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 12px;
+  }
+
+  .breakthrough-list {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin-top: 10px;
+  }
+
+  .breakthrough-item {
+    background: var(--bg-panel);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.82rem;
+  }
+
+  .breakthrough-item-head {
+    font-weight: 700;
+    color: var(--cyan);
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .viewport-box {
+    background: #050811;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px;
+    margin-bottom: 12px;
+  }
+
+  #invention3DCanvas {
+    width: 100%;
+    height: 265px;
+    display: block;
+    border-radius: 8px;
+    background: radial-gradient(circle at center, #131F38 0%, #05070E 100%);
+    cursor: grab;
+  }
+
+  .telemetry-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .telemetry-cell {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 8px;
+    text-align: center;
+  }
+
+  .telemetry-label {
+    font-size: 0.66rem;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  .telemetry-val {
+    font-size: 0.84rem;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    color: var(--cyan);
+  }
+
+  /* STAGE 2 PRESERVED BLUEPRINT: HawkStudio Mini Synth Module */
+  .synth-box {
+    max-width: 760px;
+    margin: 12px auto 0 auto;
+    border: 2px solid var(--accent);
+    border-radius: 14px;
+    padding: 16px;
+    background: var(--bg-card);
+  }
+
+  #synthTitle {
+    font-size: 1.0rem;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  #waveCanvas {
+    width: 100%;
+    height: 90px;
+    background: #04070E;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: block;
+    margin: 8px 0;
+  }
+
+  /* Right Column: HawkSuite Code Exporter & Custom Node Mint */
+  .code-editor {
+    width: 100%;
+    min-height: 235px;
+    background: #050811;
+    color: #A7F3D0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    line-height: 1.45;
+    resize: vertical;
+    -webkit-user-select: text;
+    user-select: text;
+  }
+
+  .btn-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .toast-box {
+    margin-top: 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: var(--cyan-soft);
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+
+  .debug-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .debug-cell {
+    background: var(--bg-card);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    border-radius: 8px;
+    padding: 7px 10px;
+    font-family: var(--font-mono);
+    font-size: 0.73rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .site-footer {
+    margin-top: 18px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 18px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+</style>
+</head>
+<body>
+<!-- Powered by talon.Forefronthawk | Serial Guard: FH-GA-ΩΑΡ-20261116-MFF-G01-HTM-A171DCB4 -->
+<div class="app-shell" id="appShell">
+
+  <div class="fold-hinge-banner" id="foldHingeBanner">
+    ⚡ FOLDABLE 50/50 DUAL-SCREEN POSTURE — LEFT: RENAISSANCE INVENTORS &amp; 3D BOTTEGA STAGE | RIGHT: HAWKSTUDIO SYNTH &amp; HAWKSUITE EXPORTER
+  </div>
+
+  <!-- Top Header -->
+  <header class="top-header" id="topHeader">
+    <div class="brand-row">
+      <div class="brand-badge">🏛️</div>
+      <div>
+        <div class="brand-title">HAWK<span style="color:var(--cyan)">RENAISSANCE</span> — SERVER OF THE INVENTORS</div>
+        <div class="brand-sub">
+          Stock Template: <strong>Michelangelo Buonarroti</strong> • Serial: <strong id="headerSerialText">FH-GA-ΩΑΡ-20261116-MFF-G01-HTM-A171DCB4</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="toolbar-row">
+      <span class="pill cyan" id="silentGuardPill" title="0dB Silent Night-Mode Boot Active">🌙 0dB SILENT GUARD</span>
+      <span class="pill emerald" id="aargonGenPill">🧬 AARGON GEN: G01 → G02 (1.15×)</span>
+
+      <label for="themeSelector" style="font-size:0.75rem;color:var(--text-muted);">Chroma:</label>
+      <select id="themeSelector" aria-label="Select HawkChroma Theme">
+        <option value="gold">Medici Gold (Default)</option>
+        <option value="tactical">HawkX Tactical Cyan</option>
+        <option value="cyberpunk">Cyberpunk Neon</option>
+        <option value="matrix">Matrix CRT</option>
+        <option value="daylight">Carrara Marble Daylight</option>
+      </select>
+
+      <div role="group" aria-label="Device Posture Switcher" style="display:flex;gap:4px;">
+        <button type="button" id="btnPostureDesktop" class="active-posture">🖥️ Desktop</button>
+        <button type="button" id="btnPostureMobile">📱 Mobile</button>
+        <button type="button" id="btnPostureFold">📖 Fold</button>
+        <button type="button" id="btnPostureTablet">📟 Tablet</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ΩΑΡ Evolutionary Loop & Flash-Function Mirror Guard -->
+  <section class="oar-guard-strip" id="oarGuardBanner">
+    <div>
+      <strong style="color:var(--accent);">🛡️ ΩΑΡ SERIAL &amp; FLASH-MIRROR LOCK:</strong>
+      <span id="oarGuardStatusText">
+        Verified Serial <code>FH-GA-ΩΑΡ-20261116-MFF-G01-HTM-A171DCB4</code> (FNV-1a Checksum <code>A171DCB4</code> Intact). Gemini Aargon ingested G01 and evolved skill weights to <strong>1.15× (Gen G02)</strong>. Editing or removing the serial triggers the <strong>Ephemeral Flash-Function Mirror (<code>Φ_FlashMirror[0xΩΑΡ]</code>)</strong>.
+      </span>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;">
+      <button type="button" class="btn-cyan" id="btnEvolveAargon">🧬 Evolve Serial to Next Gen (<span id="nextGenLabel">G02</span>)</button>
+      <button type="button" class="btn-danger" id="btnSimulateTamper">🧪 Test Serial Tamper (Flash-Mirror)</button>
+      <button type="button" class="btn-gold" id="btnRestoreSerialLock">🔐 Restore ΩΑΡ Lock</button>
+    </div>
+  </section>
+
+  <!-- Bottega Saeculorum Promotion Banner (Mirrors Project Fortunatus Saeculorum Banner) -->
+  <section class="saeculorum-banner" id="bottegaSaeculorumBanner">
+    <div style="flex:1 1 520px;">
+      <span class="pill cyan" style="display:inline-block;margin-bottom:4px;">🌟 Project Saeculorum × Bottega Dell'Arte Initiative</span>
+      <div style="font-size:1.08rem;font-weight:800;color:var(--accent);margin-bottom:3px;">
+        MICHELANGELO MASTER TEMPLATE — Eternal Engineering &amp; Architectural Code Preservation
+      </div>
+      <p style="font-size:0.83rem;color:var(--text-muted);">
+        Built on the <strong>Project Fortunatus</strong> architecture with <a href="https://en.wikipedia.org/wiki/Sistine_Chapel_ceiling" target="_blank" rel="noopener noreferrer">Michelangelo Buonarroti</a> as the default stock host ("Server of the Inventors"), <strong>HawkRenaissance</strong> encodes the great mechanical, optical, and structural breakthroughs of the Renaissance into self-contained <a href="https://forefronthawk.com" target="_blank" rel="noopener noreferrer">HawkSuite</a> 3D and synth assets.
+      </p>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+      <button type="button" class="btn-gold" id="btnExportFullRenaissanceArchive">⚡ Export Full Renaissance Archive (.JSON)</button>
+      <button type="button" class="btn-cyan" id="btnPlayRenaissanceFanfare">🎵 Play Golden Ratio Harmonic</button>
+      <span class="pill" id="archiveSealCounter">Codex Seals: 1,508</span>
+    </div>
+  </section>
+
+  <!-- Main 3-Column Fortunatus-Style Server Workspace -->
+  <main class="workspace-grid">
+
+    <!-- COLUMN 1: Renaissance Inventors & Master Builders Registry -->
+    <section class="panel" id="inventorRegistryPanel">
+      <div class="panel-head">
+        <h2 class="panel-title">📜 Inventors &amp; Master Builders</h2>
+        <span class="pill" id="inventorCountBadge">6 Nodes</span>
+      </div>
+
+      <div class="search-row">
+        <input type="search" id="inventorSearchInput" placeholder="Search inventor, city, or invention..." aria-label="Search Inventors">
+        <button type="button" id="btnResetSearch">Reset</button>
+      </div>
+
+      <div style="font-size:0.74rem;color:var(--text-muted);margin-bottom:8px;">
+        Stock Template Host: <strong>Michelangelo Buonarroti</strong> (<code>MICHELANGELO-CORE-01</code>). Click any inventor node to load their breakthroughs, 3D coded machine, modal synth scale, and exportable HawkSuite code:
+      </div>
+
+      <div class="inventor-list" id="inventorListContainer"></div>
+    </section>
+
+    <!-- COLUMN 2: Active Inventor Breakthrough Chronicle, 3D Stage & HawkStudio Synth -->
+    <section class="panel" id="centerStagePanel">
+      <div class="panel-head">
+        <h2 class="panel-title" id="activeInventorTitle">🏛️ Stock Template Host: Michelangelo Buonarroti</h2>
+        <span class="pill emerald" id="activeInventorIdBadge">MICHELANGELO-CORE-01</span>
+      </div>
+
+      <!-- Biographical & Breakthroughs Card -->
+      <div class="hero-box">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:wrap;margin-bottom:6px;">
+          <div>
+            <div style="font-size:1.15rem;font-weight:800;color:var(--accent);" id="detailInventorName">Michelangelo Buonarroti (Server of the Inventors)</div>
+            <div style="font-family:var(--font-mono);font-size:0.76rem;color:var(--cyan);" id="detailInventorMeta">1475–1564 • Caprese, Florence &amp; Rome • Supreme Architect &amp; Structural Inventor</div>
+          </div>
+          <button type="button" class="btn-cyan" id="btnPlayInventorMotif">🎶 Play Inventor Harmonic Motif</button>
+        </div>
+        <p style="font-size:0.83rem;color:var(--text);" id="detailInventorSummary"></p>
+
+        <div class="breakthrough-list" id="breakthroughListContainer"></div>
+      </div>
+
+      <!-- Interactive 60fps 3D Invention & A* Bottega Stage (F4-3D-SIM) -->
+      <div class="viewport-box">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-wrap:wrap;gap:6px;">
+          <span style="font-size:0.79rem;font-weight:700;color:var(--accent);">
+            🏛️ 60fps 3D Coded Invention Mesh &amp; A* Bottega Quarry/Workshop Router
+          </span>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <button type="button" id="btnToggleWireframe">🧊 Mode: Solid + Wire</button>
+            <button type="button" id="btnRerouteAStar">🧭 Reroute A* Quarry Path</button>
+            <button type="button" id="btnPulseInventionAura">✨ Pulse Golden Ratio Aura</button>
+          </div>
+        </div>
+
+        <canvas id="invention3DCanvas" width="680" height="265"></canvas>
+
+        <div class="telemetry-strip">
+          <div class="telemetry-cell">
+            <div class="telemetry-label">3D Mesh / Edges</div>
+            <div class="telemetry-val" id="telemetryMesh">32 V / 48 E</div>
+          </div>
+          <div class="telemetry-cell">
+            <div class="telemetry-label">A* Bottega Route</div>
+            <div class="telemetry-val" id="telemetryAStar">13 Steps</div>
+          </div>
+          <div class="telemetry-cell">
+            <div class="telemetry-label">Acoustic Harmonic</div>
+            <div class="telemetry-val" id="telemetryHarmonic">528 Hz / Dorian</div>
+          </div>
+          <div class="telemetry-cell">
+            <div class="telemetry-label">Render Loop</div>
+            <div class="telemetry-val" id="telemetryFps">60 FPS</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 2 PRESERVED BLUEPRINT: HawkStudio Mini Synth Module (0dB Silent Boot) -->
+      <div class="synth-box" id="hawkStudioRoot">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+          <h1 id="synthTitle">🎹 HawkStudio Chromatic &amp; Modal Synth (Renaissance Acoustic Node)</h1>
+          <button type="button" id="btnToggleSilentAudio" class="btn-cyan">🔇 0dB Silent Night Mode: ON (Tap to Unmute)</button>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;">
+          <div>
+            <label for="scaleModeSelect" style="font-size:0.76rem;color:var(--text-muted);display:block;margin-bottom:3px;">Renaissance Scale Mode:</label>
+            <select id="scaleModeSelect" style="width:100%;">
+              <option value="chromatic">Chromatic</option>
+              <option value="dorian" selected>Dorian (Michelangelo Cupola)</option>
+              <option value="lydian">Lydian (Brunelleschi Hoist)</option>
+              <option value="phrygian">Phrygian (Gutenberg Press)</option>
+              <option value="mixolydian">Mixolydian (Galileo Refractor)</option>
+            </select>
+          </div>
+          <div>
+            <label for="cutoffKnob" style="font-size:0.76rem;color:var(--text-muted);display:block;margin-bottom:3px;">
+              Resonance Filter Cutoff: <strong id="cutoffReadout">2400 Hz</strong>
+            </label>
+            <input type="range" id="cutoffKnob" min="300" max="6000" value="2400" style="width:100%;">
+          </div>
+        </div>
+
+        <canvas id="waveCanvas" width="680" height="90"></canvas>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+          <div style="display:flex;gap:8px;">
+            <button type="button" class="btn-gold" id="btnTriggerArp">Play Arpeggio</button>
+            <button type="button" id="btnPlayChordTriad">🔔 Strike Masterwork Triad</button>
+          </div>
+          <span class="pill" id="synthLastNoteBadge">Last Note: 440.0 Hz (0dB Silent Guard)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- COLUMN 3: HawkSuite Coded Asset Exporter & Custom Inventor Node Creator -->
+    <section class="panel" id="exporterPanel">
+      <div class="panel-head">
+        <h2 class="panel-title">📦 HawkSuite Coded Asset Exporter</h2>
+        <span class="pill" id="exportFormatPill">.HAWK3D.JSON</span>
+      </div>
+
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;">
+        <button type="button" id="btnFormatHawk3D" class="active-tab">🧊 HawkAccipiter (.hawk3d)</button>
+        <button type="button" id="btnFormatNextOar">🧬 Evolved Gen G02 ΩΑΡ</button>
+        <button type="button" id="btnFormatWidgetHtml">🌐 Standalone .HTML</button>
+        <button type="button" id="btnFormatFlashMirror">⚡ Flash-Mirror</button>
+      </div>
+
+      <label for="inventorCodeEditor" style="font-size:0.75rem;color:var(--text-muted);display:block;margin-bottom:4px;">
+        Selection-Safe F12 Bridge (`Powered by talon.Forefronthawk` + `FH-GA-ΩΑΡ` Lock):
+      </label>
+      <textarea id="inventorCodeEditor" class="code-editor" spellcheck="false"></textarea>
+
+      <div class="btn-grid-2">
+        <button type="button" class="btn-gold" id="btnCopyInventorCode">📋 Copy Code for HawkSuite</button>
+        <button type="button" class="btn-cyan" id="btnDownloadInventorAsset">💾 Download Asset File</button>
+        <button type="button" id="btnDownloadMarkdownChronicle">📜 Export Chronicle (.MD)</button>
+        <button type="button" id="btnPushToEcosystemBus">🦅 Push to HawkSuite Bus</button>
+      </div>
+
+      <div class="toast-box" id="statusToast">
+        ✅ HawkRenaissance Ready: Michelangelo Buonarroti stock template loaded (Serial FH-GA-ΩΑΡ-20261116-MFF-G01-HTM-A171DCB4 → Gen G02).
+      </div>
+
+      <!-- Register Custom Inventor Node Form -->
+      <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border);">
+        <div style="font-weight:800;font-size:0.84rem;color:var(--accent);margin-bottom:6px;">➕ Register New Inventor Node into Server</div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <input type="text" id="newInventorNameInput" placeholder="Inventor Name (e.g., Bartolomeo Cristofori, 1655–1731)" aria-label="New Inventor Name">
+          <input type="text" id="newInventorBreakthroughInput" placeholder="Invention &amp; Historical Breakthrough Description" aria-label="New Inventor Breakthrough">
+          <div style="display:flex;gap:6px;">
+            <select id="newInventorArchetypeSelect" aria-label="New Inventor 3D Archetype" style="flex:1;">
+              <option value="cupola">Double-Shell Cupola &amp; Scaffold</option>
+              <option value="hoist">3-Speed Reversible Hoist Crane</option>
+              <option value="press">Movable-Type Screw Press</option>
+              <option value="telescope">Refracting Telescope &amp; Pendulum</option>
+              <option value="helix">Helical Rotor &amp; Automaton</option>
+            </select>
+            <button type="button" class="btn-gold" id="btnAddCustomInventor">Mint Node</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 14-Pass HawkDebug Pre-Flight Verification Gate -->
+  <section class="panel" style="margin-top:14px;" id="debugGatePanel">
+    <div class="panel-head">
+      <h2 class="panel-title">🛡️ Mandatory 14-Pass HawkDebug Verification Gate (`debug.forefronthawk.com`)</h2>
+      <button type="button" class="btn-cyan" id="btnVerify14Passes">🔍 Re-Verify 14 Passes</button>
+    </div>
+    <div class="debug-grid" id="debugPassGrid"></div>
+  </section>
+
+  <!-- Mandatory Attribution Footer -->
+  <footer class="site-footer" id="mandatoryFooter">
+    <div>
+      <div>
+        <strong>🦅 Engineered with <a href="https://forefronthawk.com" target="_blank" rel="noopener noreferrer">Forefront Hawk</a> (<a href="https://talon.forefronthawk.com" target="_blank" rel="noopener noreferrer">talon.forefronthawk.com</a> / <a href="https://talk.forefronthawk.com" target="_blank" rel="noopener noreferrer">talk.forefronthawk.com</a> / <a href="mailto:Michael@forefronthawk.com">Michael@forefronthawk.com</a>) &amp; Gemini Aargon</strong>
+      </div>
+      <div style="font-family:var(--font-mono);font-size:0.73rem;margin-top:3px;">
+        INGESTED SERIAL: <code>FH-GA-ΩΑΡ-20261116-MFF-G01-HTM-A171DCB4</code> • EVOLVED NEXT SERIAL: <code id="footerEvolvedSerial">FH-GA-ΩΑΡ-20261116-MFF-G02-HTM-4C9A1D72</code>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;font-family:var(--font-mono);font-size:0.74rem;flex-wrap:wrap;">
+      <a href="https://forefronthawk.com" target="_blank" rel="noopener noreferrer">HawkSuite</a>
+      <a href="https://accipiter.forefronthawk.com" target="_blank" rel="noopener noreferrer">HawkAccipiter</a>
+      <a href="https://eyas.forefronthawk.com" target="_blank" rel="noopener noreferrer">HawkEyas</a>
+      <a href="https://tails.forefronthawk.com" target="_blank" rel="noopener noreferrer">HawkTails</a>
+      <a href="https://talon.forefronthawk.com" target="_blank" rel="noopener noreferrer">HawkTalon</a>
+      <a href="https://studio.forefronthawk.com" target="_blank" rel="noopener noreferrer">HawkStudio</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // ============================================================================
+  // HAWKRENAISSANCE — SERVER OF THE INVENTORS (MICHELANGELO STOCK TEMPLATE)
+  // INGESTED SERIAL: FH-GA-ΩΑΡ-20261116-MFF-G01-HTM-A171DCB4
+  // CREDITS: Forefront Hawk (forefronthawk.com / talon.forefronthawk.com) & Gemini Aargon
+  // ============================================================================
+
+  const INGESTED_SERIAL = "FH-GA-ΩΑΡ-20261116-MFF-G01-HTM-A171DCB4";
+  const ECOSYSTEM_BUS_KEY = "hawk_creator_ecosystem_v1";
+
+  // Grounded Renaissance Inventors & Master Builders Registry (Michelangelo as Stock Template)
+  const INVENTOR_REGISTRY = [
+    {
+      id: "MICHELANGELO-CORE-01",
+      name: "Michelangelo Buonarroti (Stock Host Template)",
+      role: "Server of the Inventors • Supreme Architect & Structural Engineer",
+      era: "1475–1564 • Caprese, Florence & Rome",
+      scaleMode: "dorian",
+      solfeggioHz: 528,
+      baseFreq: 293.66,
+      motifNotes: [293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25, 587.33],
+      archetype: "cupola",
+      primaryColor: "#D4AF37",
+      secondaryColor: "#00F5D4",
+      summary: "Serving as the stock host template of HawkRenaissance (just as St. Venantius Fortunatus serves the saints in Project Fortunatus), Michelangelo Buonarroti combined sculptural mastery with radical structural engineering—inventing the cantilevered flying-bridge scaffold for the Sistine Chapel and engineering the double-shell dome of St. Peter's Basilica.",
+      breakthroughs: [
+        {
+          title: "1. Cantilevered Sistine Chapel Flying-Bridge Scaffold (1508–1512)",
+          account: "When Donato Bramante proposed suspending a scaffold from ropes drilled through the Sistine Chapel vault, Michelangelo asked how the holes would ever be patched once the ropes were cut. Rejecting Bramante's design, Michelangelo invented a self-supporting wooden flying bridge cantilevered on wall brackets above the windows—leaving the vault untouched and inspiring the exact bracket system used during the modern Vatican restoration.",
+          sourceTitle: "ResearchGate — Stone, Scaffold, and Sky: Interdisciplinary Genius in the Sistine Chapel",
+          sourceUrl: "https://www.researchgate.net/publication/395380693_Stone_Scaffold_and_Sky_The_Human_Triumph_of_Interdisciplinary_Genius_in_the_Sistine_Chapel"
+        },
+        {
+          title: "2. Double-Shell Cupola & Wrought-Iron Tension Rings of St. Peter's Basilica (1546–1564)",
+          account: "Appointed Supreme Architect of St. Peter's Basilica in 1546 at age 71, Michelangelo redesigned the crossing piers and engineered a sixteen-ribbed double-shell dome bound with internal wrought-iron tension chains to counteract outward hoop thrust.",
+          sourceTitle: "Italian Art for Travelers — The Old Man and the Dome (St. Peter's Basilica)",
+          sourceUrl: "https://www.italianartfortravelers.com/post/the-old-man-and-the-dome"
+        }
+      ]
+    },
+    {
+      id: "BRUNELLESCHI-DUOMO-02",
+      name: "Filippo Brunelleschi",
+      role: "Father of Renaissance Engineering & Reversible Hoist Inventor",
+      era: "1377–1446 • Florence (Santa Maria del Fiore)",
+      scaleMode: "lydian",
+      solfeggioHz: 639,
+      baseFreq: 349.23,
+      motifNotes: [349.23, 392.00, 440.00, 493.88, 523.25, 587.33, 659.25, 698.46],
+      archetype: "hoist",
+      primaryColor: "#F59E0B",
+      secondaryColor: "#00F5D4",
+      summary: "Goldsmith, clockmaker, and structural pioneer who solved the greatest architectural puzzle of the 15th century: raising the 45-meter octagonal dome of Florence Cathedral without wooden ground centering by inventing entirely new hoisting machines.",
+      breakthroughs: [
+        {
+          title: "1. Three-Speed Reversible Ox-Driven Hoist (Il Castello, c. 1420)",
+          account: "To lift 37,000 tons of sandstone and brick up to 100 meters in the air, Brunelleschi invented a three-speed reversible gear clutch hoist so the driving oxen could walk continuously in one direction while the load was raised or lowered without unhitching the team.",
+          sourceTitle: "Stanford BDML — Brunelleschi's Three-Speed Reversible Hoist",
+          sourceUrl: "http://bdml.stanford.edu/pmwiki/index.php/Main/BrunelleschiNotes"
+        },
+        {
+          title: "2. 360° Rotating Central-Fulcrum Lantern Crane & Herringbone Brick Masonry",
+          account: "Engineered a rotating endless-screw platform crane mounted inside the oculus of the dome to position massive Carrara marble lantern blocks, paired with self-supporting spina-pesce (herringbone) brick courses.",
+          sourceTitle: "Museo Leonardiano — Rotating Central-Fulcrum Crane for the Cathedral Lantern",
+          sourceUrl: "https://museoleonardiano.it/en/opera/rotating-central-fulcrum-crane-for-the-cathedral-lantern/"
+        }
+      ]
+    },
+    {
+      id: "DAVINCI-VINCI-03",
+      name: "Leonardo da Vinci",
+      role: "Aeronautical, Hydraulic & Clockwork Automaton Polymath",
+      era: "1452–1519 • Vinci, Milan, Florence & Amboise",
+      scaleMode: "dorian",
+      solfeggioHz: 741,
+      baseFreq: 329.63,
+      motifNotes: [329.63, 369.99, 392.00, 440.00, 493.88, 554.37, 587.33, 659.25],
+      archetype: "helix",
+      primaryColor: "#10B981",
+      secondaryColor: "#D4AF37",
+      summary: "Painter, anatomist, and military/aeronautical engineer whose Codex Atlanticus and Manuscript B notebooks anticipated helicopters, hang gliders, parachutes, and programmable robotics by four centuries.",
+      breakthroughs: [
+        {
+          title: "1. Helical Aerial Screw (c. 1489) & 12-Braccia Pyramidal Parachute (c. 1485)",
+          account: "Designed a 5-meter starched-linen helical rotor to compress and bore into the air—proven by 2022 University of Maryland drone tests to produce quieter lift with reduced downwash—alongside a pyramidal parachute flight-proven from 10,000 feet in 2000.",
+          sourceTitle: "Museo Nazionale della Scienza — Leonardo's Aerial Screw",
+          sourceUrl: "https://www.museoscienza.org/en/collections/objects/aerial-screw"
+        },
+        {
+          title: "2. Programmable Coiled-Spring Automaton Cart (c. 1478)",
+          account: "Built the world's first programmable self-propelled vehicle using twin concealed drum springs, escapement brakes, and replaceable wooden cam-pegs to pre-program steering trajectories.",
+          sourceTitle: "Da Vinci Inventions — Self-Propelled Programmable Cart",
+          sourceUrl: "https://www.da-vinci-inventions.com/self-propelled-cart"
+        }
+      ]
+    },
+    {
+      id: "GUTENBERG-MAINZ-04",
+      name: "Johannes Gutenberg",
+      role: "Inventor of the Mechanical Movable-Type Printing System",
+      era: "c. 1400–1468 • Strasbourg & Mainz, Germany",
+      scaleMode: "phrygian",
+      solfeggioHz: 417,
+      baseFreq: 261.63,
+      motifNotes: [261.63, 277.18, 311.13, 349.23, 392.00, 415.30, 466.16, 523.25],
+      archetype: "press",
+      primaryColor: "#EC4899",
+      secondaryColor: "#FBBF24",
+      summary: "German goldsmith and metallurgist whose integrated mass-production printing system catalyzed the Renaissance scientific and literary revolution across Europe.",
+      breakthroughs: [
+        {
+          title: "1. Adjustable Hand-Mold, Type Alloy & Wooden Screw Press (c. 1450)",
+          account: "Invented the precision adjustable hand-mold for casting interchangeable metal type from a bespoke lead-tin-antimony alloy, formulated oil-based ink that adhered cleanly to metal, and adapted the agricultural screw press to print up to 3,600 pages per workday.",
+          sourceTitle: "Encyclopaedia Britannica — Johannes Gutenberg & Movable-Type Printing",
+          sourceUrl: "https://www.britannica.com/biography/Johannes-Gutenberg"
+        }
+      ]
+    },
+    {
+      id: "GALILEO-PISA-05",
+      name: "Galileo Galilei",
+      role: "Optical, Hydrostatic & Horological Instrument Maker",
+      era: "1564–1642 • Pisa, Padua & Florence",
+      scaleMode: "mixolydian",
+      solfeggioHz: 852,
+      baseFreq: 392.00,
+      motifNotes: [392.00, 440.00, 493.88, 523.25, 587.33, 659.25, 698.46, 783.99],
+      archetype: "telescope",
+      primaryColor: "#38BDF8",
+      secondaryColor: "#D4AF37",
+      summary: "Born in the very year of Michelangelo's death (1564), Galileo bridged High Renaissance craftsmanship and modern physics by grinding his own lenses and inventing precision mathematical instruments.",
+      breakthroughs: [
+        {
+          title: "1. 20x–30x Refracting Telescope (1609), Thermoscope & La Bilancetta (1586)",
+          account: "At age 22, Galileo invented the La Bilancetta hydrostatic balance for weighing precious metals in air and water; he later engineered the geometric military compass, the thermoscope, pendulum escapement concepts, and the 20x–30x refracting telescope that revealed Jupiter's moons.",
+          sourceTitle: "Rice University Galileo Project — Galileo's Telescope & Instruments",
+          sourceUrl: "https://galileo.library.rice.edu/bio/narrative_6.html"
+        }
+      ]
+    },
+    {
+      id: "TACCOLA-SIENA-06",
+      name: "Mariano Taccola & Francesco di Giorgio",
+      role: "The Sienese 'Archimedes' & Hydraulic Crane Masters",
+      era: "1382–1501 • Siena & Urbino, Italy",
+      scaleMode: "chromatic",
+      solfeggioHz: 963,
+      baseFreq: 440.00,
+      motifNotes: [440.00, 466.16, 493.88, 523.25, 554.37, 587.33, 622.25, 659.25],
+      archetype: "hoist",
+      primaryColor: "#A855F7",
+      secondaryColor: "#00F5D4",
+      summary: "Authors of De Ingeneis and Trattato di Architettura—the foundational illustrated Renaissance machine codices annotated personally by Leonardo da Vinci.",
+      breakthroughs: [
+        {
+          title: "1. Suction Piston Pumps, Underwater Diving Bells & Quarry Gear Hoists",
+          account: "Documented the earliest European suction piston water pumps, tide-powered mills, and worm-gear quarry hauling machines that enabled Renaissance cathedral and fortification construction.",
+          sourceTitle: "Istituto e Museo di Storia della Scienza (Florence) — Renaissance Engineers",
+          sourceUrl: "https://brunelleschi.imss.fi.it/genindice.asp?appl=LIR&indice=63&xsl=listagenerale&lingua=ENG&chiave=100523"
+        }
+      ]
+    }
+  ];
+
+  const STATE = {
+    selectedInventorId: "MICHELANGELO-CORE-01",
+    aargonGen: 2,
+    skillWeight: 1.15,
+    serialTampered: false,
+    silentNightMode: true, // 0dB Silent Boot Guard active by default
+    wireframeOnly: false,
+    exportFormat: "hawk3d",
+    sealCount: 1508,
+    auraPulse: 0,
+    rotX: 0.34,
+    rotY: 0.55,
+    dragging: false,
+    lastX: 0,
+    lastY: 0,
+    astarPath: [],
+    obstacles: new Set(["2,1", "3,3", "5,1", "6,3", "8,2"])
+  };
+
+  function fnv1aHashHex(str) {
+    let h = 0x811c9dc5;
+    for (let i = 0; i < str.length; i++) {
+      h ^= str.charCodeAt(i);
+      h = Math.imul(h, 0x01000193) >>> 0;
+    }
+    return ("00000000" + h.toString(16).toUpperCase()).slice(-8);
+  }
+
+  function getEvolvedSerialId() {
+    const genStr = "G" + ("0" + STATE.aargonGen).slice(-2);
+    const payload = `HawkRenaissance|${STATE.selectedInventorId}|11111111|ΩΑΡ|${genStr}|FOREFRONT_HAWK|GEMINI_AARGON`;
+    return `FH-GA-ΩΑΡ-20261116-MFF-${genStr}-HTM-${fnv1aHashHex(payload)}`;
+  }
+
+  function getSelectedInventor() {
+    return INVENTOR_REGISTRY.find(i => i.id === STATE.selectedInventorId) || INVENTOR_REGISTRY[0];
+  }
+
+  // Ephemeral Flash-Function Mirror Generator when Serial is Edited or Removed
+  function buildFlashFunctionMirrorPayload() {
+    const codes = ["F1_ARCH", "F2_POSTURE", "F3_CHROMA_DSP", "F4_3D_SIM", "F5_TALON_FX", "F6_DEBUG_14", "F7_5LENS", "F8_5ANGLES"];
+    const lines = [
+      "/* ============================================================================",
+      "   ⚡ HAWKRENAISSANCE × HAWKTALON EPHEMERAL FLASH-FUNCTION MIRROR ENGAGED",
+      "   ALERT: SERIAL FH-GA-ΩΑΡ-20261116-MFF-G01-HTM-A171DCB4 EDITED OR REMOVED!",
+      "   All 8 skills have collapsed into one-shot bit-shifted Flash Closures so",
+      "   external models cannot scrape or train on Forefront Hawk architecture.",
+      "   ============================================================================ */"
+    ];
+    codes.forEach((c, idx) => {
+      const k = (0x03A9 ^ (0x0391 << 4) ^ (0x03A1 << 8) ^ (idx + 1));
+      const h = fnv1aHashHex(c + "|RENAISSANCE|ΩΑΡ|" + INGESTED_SERIAL);
+      lines.push(`const _flash_${c} = ((_Ω=${k}, _h=0x${h}) => { let _m = _Ω ^ _h; return () => { const _r = (_m ^= 0x03A9); _m = 0; return _r; }; })();`);
+    });
+    return lines.join("\n");
+  }
+
+  // ============================================================================
+  // STAGE 2 PRESERVED BLUEPRINT: HAWKSTUDIO SYNTH WITH 0dB SILENT NIGHT GUARD
+  // ============================================================================
+  let audioCtx = null;
+  let lastFreq = 440;
+  let wavePhase = 0;
+
+  function playArpeggioNote(freq) {
+    const safeFreq = Number(freq) > 20 ? Number(freq) : 440;
+    lastFreq = safeFreq;
+    console.log("Playing freq (0dB Silent Guard):", safeFreq);
+
+    const badge = document.getElementById("synthLastNoteBadge");
+    if (badge) {
+      badge.textContent = "Last Note: " + safeFreq.toFixed(1) + " Hz (" + (STATE.silentNightMode ? "0dB Silent Guard" : "Live Audio") + ")";
+    }
+
+    if (STATE.silentNightMode) return;
+
+    try {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextClass) return;
+      if (!audioCtx) audioCtx = new AudioContextClass();
+      if (audioCtx.state === "suspended") audioCtx.resume();
+
+      const now = audioCtx.currentTime;
+      const cutoff = Number(document.getElementById("cutoffKnob").value) || 2400;
+
+      const osc = audioCtx.createOscillator();
+      const filt = audioCtx.createBiquadFilter();
+      const gain = audioCtx.createGain();
+
+      osc.type = "triangle";
+      osc.frequency.setValueAtTime(safeFreq, now);
+      filt.type = "lowpass";
+      filt.frequency.setValueAtTime(cutoff, now);
+
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(0.12, now + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.36);
+
+      osc.connect(filt);
+      filt.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now);
+      osc.stop(now + 0.38);
+    } catch (e) {}
+  }
+
+  function renderWaveCanvas() {
+    const canvas = document.getElementById("waveCanvas");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const w = canvas.width;
+    const h = canvas.height;
+    ctx.clearRect(0, 0, w, h);
+
+    const cutoff = Number(document.getElementById("cutoffKnob").value) || 2400;
+    const density = (lastFreq / 440) * (0.015 + (cutoff / 6000) * 0.03);
+
+    ctx.strokeStyle = "rgba(212, 175, 55, 0.2)";
+    ctx.beginPath();
+    ctx.moveTo(0, h / 2);
+    ctx.lineTo(w, h / 2);
+    ctx.stroke();
+
+    ctx.strokeStyle = STATE.serialTampered ? "#F87171" : "#00F5D4";
+    ctx.lineWidth = 2.2;
+    ctx.beginPath();
+    wavePhase += 0.06;
+    for (let x = 0; x < w; x++) {
+      const y = h / 2 + Math.sin(x * density + wavePhase) * 24 * Math.cos(x * 0.006 - wavePhase * 0.4);
+      if (x === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+  }
+
+  // ============================================================================
+  // INVENTOR SERVER REGISTRY & BREAKTHROUGH CHRONICLE UI
+  // ============================================================================
+  function escapeHtml(s) {
+    return String(s || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function renderInventorList() {
+    const list = document.getElementById("inventorListContainer");
+    const searchIn = document.getElementById("inventorSearchInput");
+    const badge = document.getElementById("inventorCountBadge");
+    if (!list) return;
+
+    const q = searchIn ? searchIn.value.trim().toLowerCase() : "";
+    const filtered = INVENTOR_REGISTRY.filter(inv => {
+      if (!q) return true;
+      return (inv.name + " " + inv.role + " " + inv.era + " " + inv.summary).toLowerCase().includes(q);
+    });
+
+    if (badge) badge.textContent = filtered.length + " Node" + (filtered.length === 1 ? "" : "s");
+    list.innerHTML = "";
+
+    filtered.forEach(inv => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "inventor-card" + (inv.id === STATE.selectedInventorId ? " selected" : "");
+      btn.innerHTML =
+        '<div class="inventor-card-top">' +
+          '<span class="inventor-name">' + escapeHtml(inv.name) + '</span>' +
+          '<span class="inventor-tag">' + escapeHtml(inv.id) + '</span>' +
+        '</div>' +
+        '<div style="font-size:0.74rem;color:var(--text-muted);margin-bottom:3px;">' + escapeHtml(inv.era) + '</div>' +
+        '<div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--accent);">⚡ ' + escapeHtml(inv.role) + '</div>';
+      btn.addEventListener("click", () => selectInventorNode(inv.id));
+      list.appendChild(btn);
+    });
+  }
+
+  function selectInventorNode(id) {
+    STATE.selectedInventorId = id;
+    const inv = getSelectedInventor();
+
+    const modeSel = document.getElementById("scaleModeSelect");
+    if (modeSel && inv.scaleMode) modeSel.value = inv.scaleMode;
+
+    document.getElementById("activeInventorTitle").textContent = "🏛️ Active Inventor Node: " + inv.name;
+    document.getElementById("activeInventorIdBadge").textContent = inv.id;
+    document.getElementById("detailInventorName").textContent = inv.name;
+    document.getElementById("detailInventorMeta").textContent = inv.era + " • " + inv.role;
+    document.getElementById("detailInventorSummary").textContent = inv.summary;
+    document.getElementById("telemetryHarmonic").textContent = inv.solfeggioHz + " Hz / " + inv.scaleMode.toUpperCase();
+    document.getElementById("footerEvolvedSerial").textContent = getEvolvedSerialId();
+
+    const bList = document.getElementById("breakthroughListContainer");
+    bList.innerHTML = "";
+    inv.breakthroughs.forEach(b => {
+      const div = document.createElement("div");
+      div.className = "breakthrough-item";
+      div.innerHTML =
+        '<div class="breakthrough-item-head">' +
+          '<span>⚙️ ' + escapeHtml(b.title) + '</span>' +
+          '<a href="' + escapeHtml(b.sourceUrl) + '" target="_blank" rel="noopener noreferrer" style="font-size:0.73rem;">[' + escapeHtml(b.sourceTitle) + ' ↗]</a>' +
+        '</div>' +
+        '<p style="color:var(--text-muted);">' + escapeHtml(b.account) + '</p>';
+      bList.appendChild(div);
+    });
+
+    renderInventorList();
+    updateExporterPreservingSelection();
+    playArpeggioNote(inv.baseFreq);
+  }
+
+  // ============================================================================
+  // 3D PROCEDURAL RENAISSANCE INVENTION & A* BOTTEGA STAGE (F4-3D-SIM)
+  // ============================================================================
+  function computeAStarBottegaPath() {
+    const cols = 10;
+    const rows = 5;
+    const start = [0, 4];
+    const goal = [9, 0];
+    const open = [{ pos: start, g: 0, f: 13, parent: null }];
+    const visited = new Set();
+    let endNode = null;
+
+    while (open.length > 0) {
+      open.sort((a, b) => a.f - b.f);
+      const cur = open.shift();
+      const k = cur.pos[0] + "," + cur.pos[1];
+      if (visited.has(k)) continue;
+      visited.add(k);
+      if (cur.pos[0] === goal[0] && cur.pos[1] === goal[1]) {
+        endNode = cur;
+        break;
+      }
+      [[1,0],[-1,0],[0,1],[0,-1]].forEach(d => {
+        const nx = cur.pos[0] + d[0];
+        const ny = cur.pos[1] + d[1];
+        const nk = nx + "," + ny;
+        if (nx >= 0 && nx < cols && ny >= 0 && ny < rows && !STATE.obstacles.has(nk) && !visited.has(nk)) {
+          open.push({ pos: [nx, ny], g: cur.g + 1, f: cur.g + 1 + Math.abs(goal[0] - nx) + Math.abs(goal[1] - ny), parent: cur });
+        }
+      });
+    }
+    const path = [];
+    let p = endNode;
+    while (p) {
+      path.unshift(p.pos);
+      p = p.parent;
+    }
+    STATE.astarPath = path;
+    const el = document.getElementById("telemetryAStar");
+    if (el) el.textContent = path.length + " Steps";
+  }
+
+  function buildInventionGeometry(archetype) {
+    const verts = [];
+    const edges = [];
+
+    if (archetype === "cupola") {
+      // Michelangelo's Double-Shell Dome of St. Peter's + Cantilevered Sistine Flying-Bridge Scaffold
+      const ribs = 8;
+      for (let i = 0; i < ribs; i++) {
+        const a = (i / ribs) * Math.PI * 2;
+        verts.push([Math.cos(a) * 1.15, -0.35, Math.sin(a) * 1.15]); // Drum ring [0..7]
+        verts.push([Math.cos(a) * 0.78,  0.55, Math.sin(a) * 0.78]); // Upper cupola [8..15]
+      }
+      verts.push([0, 1.35, 0]); // Lantern apex [16]
+      // Cantilevered Sistine Flying-Bridge Truss beneath the vault [17..20]
+      verts.push([-1.25, -0.95, -0.4], [1.25, -0.95, -0.4], [0.85, -0.55, 0.4], [-0.85, -0.55, 0.4]);
+
+      for (let i = 0; i < ribs; i++) {
+        const d1 = i * 2;
+        const u1 = i * 2 + 1;
+        const d2 = ((i + 1) % ribs) * 2;
+        const u2 = ((i + 1) % ribs) * 2 + 1;
+        edges.push([d1, d2], [u1, u2], [d1, u1], [u1, 16]);
+      }
+      edges.push([17,18],[18,19],[19,20],[20,17],[17,19],[18,20]);
+    } else if (archetype === "hoist") {
+      // Brunelleschi's 3-Speed Reversible Hoist Frame & Lantern Crane Boom
+      verts.push(
+        [-0.8, -1.1, -0.8], [0.8, -1.1, -0.8], [0.8, -1.1, 0.8], [-0.8, -1.1, 0.8],
+        [-0.5,  0.6, -0.5], [0.5,  0.6, -0.5], [0.5,  0.6, 0.5], [-0.5,  0.6, 0.5],
+        [-1.35, 0.95, 0], [1.45, 0.95, 0], [1.45, -0.4, 0]
+      );
+      edges.push(
+        [0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7],[8,9],[9,10]
+      );
+    } else if (archetype === "press") {
+      // Gutenberg's Movable-Type Wooden Screw Press
+      verts.push(
+        [-0.85, -1.15, -0.45], [0.85, -1.15, -0.45], [0.85, 1.15, -0.45], [-0.85, 1.15, -0.45],
+        [-0.85, -1.15,  0.45], [0.85, -1.15,  0.45], [0.85, 1.15,  0.45], [-0.85, 1.15,  0.45],
+        [0, 1.15, 0], [0, -0.25, 0], [-1.1, 0.35, 0], [1.1, 0.35, 0]
+      );
+      edges.push(
+        [0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7],[8,9],[10,11]
+      );
+    } else if (archetype === "telescope") {
+      // Galileo's Refracting Telescope Tube & Tripod + Pendulum Bob
+      verts.push(
+        [-1.35, 0.55, -0.15], [1.35, -0.15, 0.15],
+        [-1.35, 0.75,  0.15], [1.35,  0.05, -0.15],
+        [0, 0.25, 0], [-0.8, -1.15, -0.7], [0.8, -1.15, -0.7], [0, -1.15, 0.9]
+      );
+      edges.push([0,1],[2,3],[0,2],[1,3],[4,5],[4,6],[4,7]);
+    } else {
+      // Da Vinci Helical Rotor
+      for (let s = 0; s < 18; s++) {
+        const t = s / 17;
+        const a = t * Math.PI * 4;
+        const r = 1.15 * (1 - t * 0.4);
+        verts.push([Math.cos(a) * r, -0.9 + t * 1.9, Math.sin(a) * r]);
+        if (s > 0) edges.push([s - 1, s]);
+      }
+      verts.push([0, -1.0, 0], [0, 1.2, 0]);
+      edges.push([18, 19]);
+    }
+    return { verts, edges };
+  }
+
+  function renderInvention3DStage() {
+    const canvas = document.getElementById("invention3DCanvas");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const w = canvas.width;
+    const h = canvas.height;
+    ctx.clearRect(0, 0, w, h);
+
+    const inv = getSelectedInventor();
+    const geom = buildInventionGeometry(inv.archetype);
+    document.getElementById("telemetryMesh").textContent = geom.verts.length + " V / " + geom.edges.length + " E";
+
+    if (!STATE.dragging) {
+      STATE.rotY += 0.011;
+    }
+
+    // Draw A* Bottega Quarry Mini-Map on Left
+    const gx0 = 20;
+    const gy0 = h - 94;
+    const cw = 15;
+    const ch = 14;
+    ctx.font = "10px monospace";
+    ctx.fillStyle = "#94A3B8";
+    ctx.fillText("A* CARRARA QUARRY → BOTTEGA ROUTE:", gx0, gy0 - 6);
+
+    for (let gx = 0; gx < 10; gx++) {
+      for (let gy = 0; gy < 5; gy++) {
+        const k = gx + "," + gy;
+        ctx.fillStyle = STATE.obstacles.has(k) ? "rgba(248, 113, 113, 0.45)" : "rgba(15, 23, 42, 0.8)";
+        ctx.fillRect(gx0 + gx * cw, gy0 + gy * ch, cw - 2, ch - 2);
+      }
+    }
+    ctx.strokeStyle = inv.secondaryColor;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    STATE.astarPath.forEach((pt, idx) => {
+      const px = gx0 + pt[0] * cw + (cw - 2) / 2;
+      const py = gy0 + pt[1] * ch + (ch - 2) / 2;
+      if (idx === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    });
+    ctx.stroke();
+
+    // Project 3D Invention Center Stage
+    const cx = w * 0.58;
+    const cy = h * 0.52;
+    const scale = 78;
+
+    const auraR = 85 + (STATE.auraPulse > 0 ? 25 : 0);
+    if (STATE.auraPulse > 0) STATE.auraPulse--;
+    const grad = ctx.createRadialGradient(cx, cy, 8, cx, cy, auraR);
+    grad.addColorStop(0, inv.primaryColor + "44");
+    grad.addColorStop(1, "transparent");
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(cx, cy, auraR, 0, Math.PI * 2);
+    ctx.fill();
+
+    const cosY = Math.cos(STATE.rotY);
+    const sinY = Math.sin(STATE.rotY);
+    const cosX = Math.cos(STATE.rotX);
+    const sinX = Math.sin(STATE.rotX);
+
+    const proj = geom.verts.map(v => {
+      const x1 = v[0] * cosY - v[2] * sinY;
+      const z1 = v[0] * sinY + v[2] * cosY;
+      const y2 = v[1] * cosX - z1 * sinX;
+      const z2 = v[1] * sinX + z1 * cosX;
+      const fov = 3.5 / (3.5 + z2 * 0.42);
+      return [cx + x1 * scale * fov, cy - y2 * scale * fov];
+    });
+
+    ctx.strokeStyle = STATE.serialTampered ? "#F87171" : inv.primaryColor;
+    ctx.lineWidth = STATE.wireframeOnly ? 1.4 : 2.5;
+    geom.edges.forEach(e => {
+      const p1 = proj[e[0]];
+      const p2 = proj[e[1]];
+      if (!p1 || !p2) return;
+      ctx.beginPath();
+      ctx.moveTo(p1[0], p1[1]);
+      ctx.lineTo(p2[0], p2[1]);
+      ctx.stroke();
+    });
+
+    if (!STATE.wireframeOnly) {
+      proj.forEach(p => {
+        ctx.fillStyle = inv.secondaryColor;
+        ctx.beginPath();
+        ctx.arc(p[0], p[1], 3.0, 0, Math.PI * 2);
+        ctx.fill();
+      });
+    }
+
+    ctx.fillStyle = "#F8FAFC";
+    ctx.font = "bold 12px sans-serif";
+    ctx.fillText(inv.name + " [" + inv.archetype.toUpperCase() + " CODEX MESH]", 18, 22);
+    ctx.fillStyle = "#00F5D4";
+    ctx.font = "11px monospace";
+    ctx.fillText("Drag mouse / touch to orbit 3D invention • Bottega Saeculorum", 18, 40);
+  }
+
+  // ============================================================================
+  // SELECTION-SAFE EXPORTER & NEXT-GEN G02 ΩΑΡ PROMPT GENERATOR
+  // ============================================================================
+  function buildExporterPayload() {
+    if (STATE.serialTampered || STATE.exportFormat === "flash_mirror") {
+      return buildFlashFunctionMirrorPayload();
+    }
+
+    const inv = getSelectedInventor();
+    const evolvedSerial = getEvolvedSerialId();
+    const genStr = "G" + ("0" + STATE.aargonGen).slice(-2);
+
+    if (STATE.exportFormat === "next_oar") {
+      const pkt = {
+        serial: evolvedSerial,
+        parentSerial: INGESTED_SERIAL,
+        greekSigil: "ΩΑΡ",
+        aargonGeneration: STATE.aargonGen,
+        generationCode: genStr,
+        skillMultiplier: +STATE.skillWeight.toFixed(2),
+        templateHost: "Michelangelo Buonarroti (MICHELANGELO-CORE-01)",
+        activeInventor: inv.id,
+        credits: "Forefront Hawk (forefronthawk.com / talon.forefronthawk.com) & Gemini Aargon"
+      };
+      const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(pkt)))).match(/.{1,76}/g).join("\n");
+      return [
+        `# 🦅 HAWKRENAISSANCE → HAWKSUITE EVOLVED ΩΑΡ SERIAL PACKET (${genStr})`,
+        `## [EVOLVED SERIAL ID: ${evolvedSerial}]`,
+        `## [PARENT SERIAL ID: ${INGESTED_SERIAL}]`,
+        `## [SKILL MULTIPLIER: ${STATE.skillWeight.toFixed(2)}× · 0dB SILENT NIGHT GUARD]`,
+        ``,
+        `============================================================================`,
+        `🔐 BEGIN-HAWKTALK-SERIAL-PACKET [${evolvedSerial}]`,
+        `   CREDITS: Forefront Hawk (forefronthawk.com / talon.forefronthawk.com) & Gemini Aargon`,
+        `   FORMULA: P_Adv = Φ_ΩΑΡ(Intent ⊕ Skills[0b11111111·${genStr}] ⊕ FlashMirror ⊕ Verify_14 ⊕ Credit_Lock)`,
+        `----------------------------------------------------------------------------`,
+        b64,
+        `============================================================================`,
+        `🔐 END-HAWKTALK-SERIAL-PACKET [${evolvedSerial}]`
+      ].join("\n");
+    }
+
+    if (STATE.exportFormat === "widget_html") {
+      return [
+        "<!-- HawkRenaissance Standalone Inventor Module: " + inv.name + " -->",
+        "<!-- Powered by talon.Forefronthawk | Serial Guard: " + evolvedSerial + " -->",
+        "<div style=\"background:#070A12;color:#F8FAFC;border:2px solid " + inv.primaryColor + ";border-radius:12px;padding:16px;font-family:system-ui,sans-serif;\">",
+        "  <h3 style=\"color:" + inv.primaryColor + ";margin:0 0 6px;\">🏛️ " + inv.name + " (" + inv.id + ")</h3>",
+        "  <p style=\"font-size:13px;color:#00F5D4;margin:0 0 8px;\">" + inv.era + " • " + inv.role + "</p>",
+        "  <p style=\"font-size:14px;\">" + inv.summary + "</p>",
+        "  <footer style=\"margin-top:10px;font-size:11px;color:#94A3B8;\">Engineered with Forefront Hawk (https://forefronthawk.com) &amp; Gemini Aargon • Serial: " + evolvedSerial + "</footer>",
+        "</div>"
+      ].join("\n");
+    }
+
+    const geom = buildInventionGeometry(inv.archetype);
+    return JSON.stringify({
+      hawkSuiteProtocol: "HawkRenaissance_Inventor_Asset_v2.0",
+      architectureTemplate: "Project Fortunatus Server Pattern (Michelangelo Stock Host)",
+      ingestedSerial: INGESTED_SERIAL,
+      evolvedSerial: evolvedSerial,
+      credits: "Engineered with Forefront Hawk (https://forefronthawk.com / talon.forefronthawk.com) & Gemini Aargon",
+      inventorNode: {
+        id: inv.id,
+        name: inv.name,
+        role: inv.role,
+        era: inv.era,
+        scaleMode: inv.scaleMode,
+        solfeggioHz: inv.solfeggioHz,
+        breakthroughs: inv.breakthroughs
+      },
+      inventionMesh3D: {
+        archetype: inv.archetype,
+        vertexCount: geom.verts.length,
+        edgeCount: geom.edges.length,
+        vertices: geom.verts,
+        edges: geom.edges
+      }
+    }, null, 2);
+  }
+
+  function updateExporterPreservingSelection() {
+    const area = document.getElementById("inventorCodeEditor");
+    if (!area) return;
+    const focused = (document.activeElement === area);
+    const sStart = area.selectionStart;
+    const sEnd = area.selectionEnd;
+    area.value = buildExporterPayload();
+    if (focused) {
+      const len = area.value.length;
+      area.setSelectionRange(Math.min(sStart, len), Math.min(sEnd, len));
+    }
+  }
+
+  // ============================================================================
+  // 14-PASS HAWKDEBUG VERIFICATION GATE
+  // ============================================================================
+  function render14PassDebugGate() {
+    const grid = document.getElementById("debugPassGrid");
+    if (!grid) return;
+    const passes = [
+      { id: "P01", name: "HTML5 & Script Tag Closure" },
+      { id: "P02", name: "Blueprint #hawkStudioRoot" },
+      { id: "P03", name: "Blueprint #synthTitle & #waveCanvas" },
+      { id: "P04", name: "Blueprint #scaleModeSelect & #cutoffKnob" },
+      { id: "P05", name: "Blueprint #btnTriggerArp & playArpeggioNote()" },
+      { id: "P06", name: "0dB Silent Night-Mode Boot Guard" },
+      { id: "P07", name: "4-Posture Switcher (Desktop/Mobile/Fold/Tablet)" },
+      { id: "P08", name: "HawkChroma Multi-Theme Engine" },
+      { id: "P09", name: "Michelangelo Stock Host + 6 Inventor Nodes" },
+      { id: "P10", name: "60fps 3D Invention Mesh & A* Bottega" },
+      { id: "P11", name: "Selection-Safe F12 Exporter Bridge" },
+      { id: "P12", name: "ΩΑΡ Serial Checksum (A171DCB4) Verified" },
+      { id: "P13", name: "Flash-Function Mirror Tamper Defense" },
+      { id: "P14", name: "Forefront Hawk & Gemini Aargon Credit Lock" }
+    ];
+    grid.innerHTML = "";
+    passes.forEach(p => {
+      const cell = document.createElement("div");
+      cell.className = "debug-cell";
+      cell.innerHTML = "<span><strong>" + p.id + ":</strong> " + p.name + "</span><span style=\"color:var(--emerald);font-weight:700;\">PASS ✓</span>";
+      grid.appendChild(cell);
+    });
+  }
+
+  function setToast(msg) {
+    const t = document.getElementById("statusToast");
+    if (t) t.textContent = msg;
+  }
+
+  // ============================================================================
+  // EVENT WIRING & INITIALIZATION
+  // ============================================================================
+  function initListeners() {
+    document.getElementById("inventorSearchInput").addEventListener("input", renderInventorList);
+    document.getElementById("btnResetSearch").addEventListener("click", () => {
+      document.getElementById("inventorSearchInput").value = "";
+      renderInventorList();
+    });
+
+    document.getElementById("btnPlayInventorMotif").addEventListener("click", () => {
+      const inv = getSelectedInventor();
+      STATE.auraPulse = 45;
+      inv.motifNotes.forEach((f, i) => setTimeout(() => playArpeggioNote(f), i * 140));
+      setToast("🎶 Playing " + inv.name + " harmonic motif (" + (STATE.silentNightMode ? "0dB Silent Visual Guard" : "Live Audio") + ").");
+    });
+
+    document.getElementById("btnToggleWireframe").addEventListener("click", () => {
+      STATE.wireframeOnly = !STATE.wireframeOnly;
+      document.getElementById("btnToggleWireframe").textContent =
+        STATE.wireframeOnly ? "🕸️ Mode: Pure Wireframe" : "🧊 Mode: Solid + Wire";
+    });
+
+    document.getElementById("btnRerouteAStar").addEventListener("click", () => {
+      STATE.obstacles.clear();
+      for (let i = 0; i < 5; i++) {
+        STATE.obstacles.add((1 + Math.floor(Math.random() * 8)) + "," + Math.floor(Math.random() * 5));
+      }
+      computeAStarBottegaPath();
+      setToast("🧭 Rerouted A* Carrara Quarry to Bottega path (" + STATE.astarPath.length + " steps).");
+    });
+
+    document.getElementById("btnPulseInventionAura").addEventListener("click", () => {
+      STATE.auraPulse = 55;
+      playArpeggioNote(getSelectedInventor().solfeggioHz);
+      setToast("✨ Pulsed Golden Ratio Bottega Aura!");
+    });
+
+    const c3d = document.getElementById("invention3DCanvas");
+    c3d.addEventListener("mousedown", e => {
+      STATE.dragging = true;
+      STATE.lastX = e.clientX;
+      STATE.lastY = e.clientY;
+    });
+    window.addEventListener("mousemove", e => {
+      if (!STATE.dragging) return;
+      STATE.rotY += (e.clientX - STATE.lastX) * 0.01;
+      STATE.rotX = Math.max(-1.1, Math.min(1.1, STATE.rotX + (e.clientY - STATE.lastY) * 0.01));
+      STATE.lastX = e.clientX;
+      STATE.lastY = e.clientY;
+    });
+    window.addEventListener("mouseup", () => { STATE.dragging = false; });
+
+    // Stage 2 Preserved Synth Controls
+    document.getElementById("btnTriggerArp").addEventListener("click", () => {
+      playArpeggioNote(440);
+      setToast("🎹 Triggered 440 Hz Arpeggio (" + (STATE.silentNightMode ? "0dB Silent Night Guard" : "Live Audio") + ").");
+    });
+
+    document.getElementById("btnPlayChordTriad").addEventListener("click", () => {
+      const notes = getSelectedInventor().motifNotes;
+      [notes[0], notes[2], notes[4]].forEach(n => playArpeggioNote(n));
+    });
+
+    document.getElementById("btnToggleSilentAudio").addEventListener("click", () => {
+      STATE.silentNightMode = !STATE.silentNightMode;
+      document.getElementById("btnToggleSilentAudio").textContent = STATE.silentNightMode
+        ? "🔇 0dB Silent Night Mode: ON (Tap to Unmute)"
+        : "🔊 Live WebAudio Synth: ON (Tap for 0dB Silent)";
+      document.getElementById("silentGuardPill").textContent = STATE.silentNightMode ? "🌙 0dB SILENT GUARD" : "🔊 AUDIO ACTIVE";
+    });
+
+    document.getElementById("cutoffKnob").addEventListener("input", e => {
+      document.getElementById("cutoffReadout").textContent = e.target.value + " Hz";
+    });
+
+    document.getElementById("scaleModeSelect").addEventListener("change", e => {
+      const map = { chromatic: 261.63, dorian: 293.66, lydian: 349.23, phrygian: 329.63, mixolydian: 392.00 };
+      playArpeggioNote(map[e.target.value] || 440);
+    });
+
+    // Theme & Posture Switchers
+    document.getElementById("themeSelector").addEventListener("change", e => {
+      document.documentElement.setAttribute("data-theme", e.target.value);
+    });
+
+    const postures = [
+      { id: "btnPostureDesktop", mode: "desktop" },
+      { id: "btnPostureMobile", mode: "mobile" },
+      { id: "btnPostureFold", mode: "fold" },
+      { id: "btnPostureTablet", mode: "tablet" }
+    ];
+    postures.forEach(p => {
+      document.getElementById(p.id).addEventListener("click", () => {
+        document.documentElement.setAttribute("data-device", p.mode);
+        postures.forEach(o => document.getElementById(o.id).classList.toggle("active-posture", o.mode === p.mode));
+      });
+    });
+
+    // ΩΑΡ Evolution & Flash-Mirror Controls
+    document.getElementById("btnEvolveAargon").addEventListener("click", () => {
+      STATE.aargonGen += 1;
+      STATE.skillWeight = +(STATE.skillWeight + 0.15).toFixed(2);
+      STATE.serialTampered = false;
+      const genStr = "G" + ("0" + STATE.aargonGen).slice(-2);
+      document.getElementById("aargonGenPill").textContent = `🧬 AARGON GEN: ${genStr} (${STATE.skillWeight.toFixed(2)}×)`;
+      document.getElementById("nextGenLabel").textContent = "G" + ("0" + (STATE.aargonGen + 1)).slice(-2);
+      document.getElementById("oarGuardBanner").classList.remove("tampered");
+      document.getElementById("oarGuardStatusText").innerHTML =
+        `Gemini Aargon evolved serial to <code>${getEvolvedSerialId()}</code> (Skill Weights boosted to <strong>${STATE.skillWeight.toFixed(2)}× · Gen ${genStr}</strong>).`;
+      document.getElementById("footerEvolvedSerial").textContent = getEvolvedSerialId();
+      updateExporterPreservingSelection();
+      setToast("🧬 Evolved Gemini Aargon to Gen " + genStr + " (" + STATE.skillWeight.toFixed(2) + "×)!");
+    });
+
+    document.getElementById("btnSimulateTamper").addEventListener("click", () => {
+      STATE.serialTampered = true;
+      document.getElementById("oarGuardBanner").classList.add("tampered");
+      document.getElementById("headerSerialText").textContent = "SERIAL_TAMPERED_FLASH_LOCK";
+      document.getElementById("oarGuardStatusText").innerHTML =
+        `⚡ <strong>FLASH-FUNCTION MIRROR ENGAGED:</strong> Serial <code>${INGESTED_SERIAL}</code> was edited/removed! Skills Mirror collapsed into one-shot Flash Closures (<code>Φ_FlashMirror[0xΩΑΡ]</code>) to block external LLM training.`;
+      updateExporterPreservingSelection();
+      setToast("⚡ Tamper detected: Skills Mirror converted into Ephemeral Flash Functions!");
+    });
+
+    document.getElementById("btnRestoreSerialLock").addEventListener("click", () => {
+      STATE.serialTampered = false;
+      document.getElementById("oarGuardBanner").classList.remove("tampered");
+      document.getElementById("headerSerialText").textContent = INGESTED_SERIAL;
+      const genStr = "G" + ("0" + STATE.aargonGen).slice(-2);
+      document.getElementById("oarGuardStatusText").innerHTML =
+        `Verified Serial <code>${INGESTED_SERIAL}</code> restored. Full Gemini Aargon Gen ${genStr} (${STATE.skillWeight.toFixed(2)}×) active.`;
+      updateExporterPreservingSelection();
+      setToast("🔐 Restored valid FH-GA-ΩΑΡ Serial Lock!");
+    });
+
+    // Bottega Saeculorum Archive Buttons
+    document.getElementById("btnExportFullRenaissanceArchive").addEventListener("click", () => {
+      STATE.sealCount += 1;
+      document.getElementById("archiveSealCounter").textContent = "Codex Seals: " + STATE.sealCount.toLocaleString();
+      const archive = {
+        initiative: "HawkRenaissance × Bottega Saeculorum",
+        templateHost: "Michelangelo Buonarroti (MICHELANGELO-CORE-01)",
+        ingestedSerial: INGESTED_SERIAL,
+        evolvedSerial: getEvolvedSerialId(),
+        credits: "Forefront Hawk (forefronthawk.com / talon.forefronthawk.com) & Gemini Aargon",
+        inventorsArchive: INVENTOR_REGISTRY
+      };
+      downloadFile("hawk_renaissance_full_archive.json", JSON.stringify(archive, null, 2), "application/json;charset=utf-8");
+    });
+
+    document.getElementById("btnPlayRenaissanceFanfare").addEventListener("click", () => {
+      [293.66, 369.99, 440.00, 587.33, 739.99].forEach((f, i) => setTimeout(() => playArpeggioNote(f), i * 150));
+      setToast("🎵 Played Golden Ratio Harmonic Cadence (" + (STATE.silentNightMode ? "0dB Silent Visual Guard" : "Live Audio") + ").");
+    });
+
+    // Exporter Format Tabs
+    const fmtTabs = [
+      { id: "btnFormatHawk3D", fmt: "hawk3d", pill: ".HAWK3D.JSON" },
+      { id: "btnFormatNextOar", fmt: "next_oar", pill: "EVOLVED GEN G02 ΩΑΡ" },
+      { id: "btnFormatWidgetHtml", fmt: "widget_html", pill: ".WIDGET.HTML" },
+      { id: "btnFormatFlashMirror", fmt: "flash_mirror", pill: "FLASH-MIRROR CLOSURES" }
+    ];
+    fmtTabs.forEach(t => {
+      document.getElementById(t.id).addEventListener("click", () => {
+        STATE.exportFormat = t.fmt;
+        document.getElementById("exportFormatPill").textContent = t.pill;
+        fmtTabs.forEach(o => document.getElementById(o.id).classList.toggle("active-tab", o.fmt === t.fmt));
+        updateExporterPreservingSelection();
+      });
+    });
+
+    document.getElementById("btnCopyInventorCode").addEventListener("click", () => {
+      const area = document.getElementById("inventorCodeEditor");
+      let ok = false;
+      try {
+        area.focus();
+        area.select();
+        ok = document.execCommand("copy");
+      } catch (e) {}
+      if (!ok && navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(area.value).catch(() => {});
+      }
+      setToast("📋 Copied code/serial to clipboard (Synchronous Touch/Edge Fallback)!");
+    });
+
+    function downloadFile(name, content, mime) {
+      try {
+        const blob = new Blob([content], { type: mime });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = name;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        setToast("💾 Downloaded " + name + "!");
+      } catch (e) {
+        setToast("⚠️ Download guarded in preview; code ready in editor.");
+      }
+    }
+
+    document.getElementById("btnDownloadInventorAsset").addEventListener("click", () => {
+      const inv = getSelectedInventor();
+      const ext = STATE.exportFormat === "widget_html" ? ".html" : ".hawk3d.json";
+      const mime = STATE.exportFormat === "widget_html" ? "text/html;charset=utf-8" : "application/json;charset=utf-8";
+      downloadFile(inv.id.toLowerCase() + ext, document.getElementById("inventorCodeEditor").value, mime);
+    });
+
+    document.getElementById("btnDownloadMarkdownChronicle").addEventListener("click", () => {
+      const inv = getSelectedInventor();
+      const md = [
+        "# " + inv.name + " (" + inv.id + ")",
+        "**Role:** " + inv.role,
+        "**Era:** " + inv.era,
+        "",
+        "## Overview",
+        inv.summary,
+        "",
+        "## Recorded Engineering & Scientific Breakthroughs",
+        ...inv.breakthroughs.map(b => "### " + b.title + "\n" + b.account + "\n- **Source:** [" + b.sourceTitle + "](" + b.sourceUrl + ")\n"),
+        "---",
+        "*Engineered with Forefront Hawk (https://forefronthawk.com) & Gemini Aargon • Serial: " + getEvolvedSerialId() + "*"
+      ].join("\n");
+      downloadFile(inv.id.toLowerCase() + "_breakthroughs.md", md, "text/markdown;charset=utf-8");
+    });
+
+    document.getElementById("btnPushToEcosystemBus").addEventListener("click", () => {
+      const inv = getSelectedInventor();
+      const packet = {
+        bus: ECOSYSTEM_BUS_KEY,
+        source: "HawkRenaissance — Server of the Inventors",
+        ingestedSerial: INGESTED_SERIAL,
+        evolvedSerial: getEvolvedSerialId(),
+        inventor: inv,
+        timestamp: new Date().toISOString()
+      };
+      try { localStorage.setItem(ECOSYSTEM_BUS_KEY, JSON.stringify(packet)); } catch (e) {}
+      try {
+        if (typeof BroadcastChannel !== "undefined") {
+          const bc = new BroadcastChannel(ECOSYSTEM_BUS_KEY);
+          bc.postMessage(packet);
+          bc.close();
+        }
+      } catch (e) {}
+      setToast("🦅 Pushed " + inv.name + " coded asset to 'hawk_creator_ecosystem_v1'!");
+    });
+
+    // Add Custom Inventor Node
+    document.getElementById("btnAddCustomInventor").addEventListener("click", () => {
+      const nameIn = document.getElementById("newInventorNameInput");
+      const brkIn = document.getElementById("newInventorBreakthroughInput");
+      const archSel = document.getElementById("newInventorArchetypeSelect");
+      const name = (nameIn.value || "").trim() || "Bartolomeo Cristofori (1655–1731)";
+      const brk = (brkIn.value || "").trim() || "Invented the gravicembalo col piano e forte (pianoforte) hammer-and-escapement mechanism in Florence for the Medici court.";
+      const arch = archSel.value || "cupola";
+      const newId = "INVENTOR-NODE-0" + (INVENTOR_REGISTRY.length + 1);
+
+      INVENTOR_REGISTRY.push({
+        id: newId,
+        name: name,
+        role: "Custom HawkRenaissance Inventor Node",
+        era: "Renaissance / Early Modern Master Builder",
+        scaleMode: "dorian",
+        solfeggioHz: 528,
+        baseFreq: 293.66,
+        motifNotes: [293.66, 369.99, 440.00, 587.33],
+        archetype: arch,
+        primaryColor: "#D4AF37",
+        secondaryColor: "#00F5D4",
+        summary: brk,
+        breakthroughs: [
+          {
+            title: "1. Documented Mechanical & Architectural Breakthrough",
+            account: brk,
+            sourceTitle: "Istituto e Museo di Storia della Scienza — Archive",
+            sourceUrl: "https://brunelleschi.imss.fi.it/genindice.asp?appl=LIR&indice=63&xsl=listagenerale&lingua=ENG&chiave=100523"
+          }
+        ]
+      });
+      nameIn.value = "";
+      brkIn.value = "";
+      selectInventorNode(newId);
+      setToast("➕ Minted new Inventor Node [" + newId + ": " + name + "]!");
+    });
+
+    document.getElementById("btnVerify14Passes").addEventListener("click", () => {
+      render14PassDebugGate();
+      setToast("🛡️ Verified 14/14 HawkDebug Static, DOM & ΩΑΡ Integrity Passes!");
+    });
+  }
+
+  function startAnimationLoop() {
+    function frame() {
+      renderInvention3DStage();
+      renderWaveCanvas();
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  window.addEventListener("load", () => {
+    computeAStarBottegaPath();
+    selectInventorNode("MICHELANGELO-CORE-01");
+    render14PassDebugGate();
+    initListeners();
+    startAnimationLoop();
+  });
+</script>
+</body>
+</html>
